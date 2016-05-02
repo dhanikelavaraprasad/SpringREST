@@ -1,4 +1,4 @@
-package com.ranga.util;
+package com.cyb.portal.util;
 
 import java.io.IOException;
 

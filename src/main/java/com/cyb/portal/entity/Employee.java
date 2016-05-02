@@ -1,4 +1,4 @@
-package com.ranga.entity;
+package com.cyb.portal.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,13 +1,14 @@
-/**
- * 
- */
-package com.ranga.dao;
+
+package com.cyb.portal.service;
+import com.cyb.portal.entity.Employee;
 
 import java.util.List;
 
-import com.ranga.entity.Employee;
-
-public interface EmployeeDAO {
+/**
+ * @author Ranga Reddy
+ * @version 1.0
+ */
+public interface EmployeeService {
 	public long createEmployee(Employee employee);
     public Employee updateEmployee(Employee employee);
     public void deleteEmployee(long id);

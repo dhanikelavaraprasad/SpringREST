@@ -13,7 +13,7 @@
   
   <filter>
 	  <filter-name>CorsFilter</filter-name>
-	  <filter-class>com.ranga.util.CORSFilter</filter-class>
+	  <filter-class>com.cyb.portal.util.CORSFilter</filter-class>
  </filter>
  <filter-mapping>
 	  <filter-name>CorsFilter</filter-name>

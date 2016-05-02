@@ -1,4 +1,4 @@
-package com.ranga.controller;
+package com.cyb.portal.controller;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ranga.entity.Employee;
-import com.ranga.service.EmployeeService;
-import com.ranga.util.URIConstants;
+import com.cyb.portal.entity.Employee;
+import com.cyb.portal.service.EmployeeService;
+import com.cyb.portal.util.URIConstants;
 
 
 @RestController

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package com.ranga.dao.impl;
+package com.cyb.portal.dao.impl;
 
-import com.ranga.dao.EmployeeDAO;
-import com.ranga.entity.Employee;
-import com.ranga.util.HibernateUtil;
+import com.cyb.portal.dao.EmployeeDAO;
+import com.cyb.portal.entity.Employee;
+import com.cyb.portal.util.HibernateUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

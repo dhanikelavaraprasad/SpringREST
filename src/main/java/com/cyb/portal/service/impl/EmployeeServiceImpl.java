@@ -1,7 +1,7 @@
-package com.ranga.service.impl;
-import com.ranga.dao.EmployeeDAO;
-import com.ranga.entity.Employee;
-import com.ranga.service.EmployeeService;
+package com.cyb.portal.service.impl;
+import com.cyb.portal.dao.EmployeeDAO;
+import com.cyb.portal.entity.Employee;
+import com.cyb.portal.service.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
