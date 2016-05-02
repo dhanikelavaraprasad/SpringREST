@@ -14,10 +14,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Ranga Reddy
- * @version 1.0
- */
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {

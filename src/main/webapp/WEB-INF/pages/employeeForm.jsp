@@ -1,8 +1,3 @@
-<%--
-  User: Ranga Reddy
-  Date: 1/27/2015
-  Time: 9:48 PM
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
