@@ -14,7 +14,6 @@ import com.cyb.portal.entity.Employee;
 import com.cyb.portal.service.EmployeeService;
 import com.cyb.portal.util.URIConstants;
 
-
 @RestController
 public class EmployeeController {
 	

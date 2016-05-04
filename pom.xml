@@ -9,6 +9,7 @@
 	<!-- Specifying the Versions of Spring, Hiberante, MySQL etc -->
 	<properties>
 		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
 		<mysql.version>5.1.10</mysql.version>
 		<junit-version>4.11</junit-version>
@@ -18,6 +19,7 @@
 		<java.version>1.7</java.version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<jackson.databind-version>2.2.3</jackson.databind-version>
+		<jjwt.version>0.4</jjwt.version>
 	</properties>
 
 	<!-- Specifying the Dependencies -->
@@ -28,6 +30,43 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.databind-version}</version>
 		</dependency>
+		
+		<!-- Spring Security -->
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+	       <groupId>io.jsonwebtoken</groupId>
+	       <artifactId>jjwt</artifactId>
+	       <version>${jjwt.version}</version>
+	    </dependency>
+
+		<!-- <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency> -->
+		
 		<!-- Spring 4 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>

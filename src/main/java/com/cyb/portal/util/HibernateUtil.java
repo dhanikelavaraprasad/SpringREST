@@ -7,10 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author Ranga Reddy
- * @version 1.0
- */
 @Repository
 public class HibernateUtil {
 	

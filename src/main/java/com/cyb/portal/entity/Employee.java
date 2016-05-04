@@ -8,11 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import java.io.Serializable;
-/**
- * @author Ranga Reddy
- * @version 1.0
- * 
- */
+
 @Entity
 @Table(name = "Employee")
 public class Employee implements Serializable {

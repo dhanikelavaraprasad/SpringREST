@@ -1,14 +1,11 @@
-/**
- * 
- */
 package com.cyb.portal.dao.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.cyb.portal.dao.EmployeeDAO;
 import com.cyb.portal.entity.Employee;
 import com.cyb.portal.util.HibernateUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -55,7 +52,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getAllEmployees(String employeeName) { 
-		String query = "SELECT e.* FROM Employees e WHERE e.name like '%"+ employeeName +"%'";
+		/*String query = "SELECT e.* FROM Employees e WHERE e.name like '%"+ employeeName +"%'";
 		List<Object[]> employeeObjects = hibernateUtil.fetchAll(query);
 		List<Employee> employees = new ArrayList<Employee>();
 		for(Object[] employeeObject: employeeObjects) {
@@ -70,7 +67,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			employee.setSalary(salary);
 			employees.add(employee);
 		}
-		System.out.println(employees);
-		return employees;
+		System.out.println(employees);*/
+		return null;
 	}
 }
