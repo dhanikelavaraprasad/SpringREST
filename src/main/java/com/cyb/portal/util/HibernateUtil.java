@@ -3,7 +3,10 @@ package com.cyb.portal.util;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +47,13 @@ public class HibernateUtil {
     @SuppressWarnings("unchecked")
 	public <T> T fetchById(Serializable id, Class<T> entityClass) {
         return (T)sessionFactory.getCurrentSession().get(entityClass, id);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <T> T findByUsername(String propertyName, Serializable name, Class<T> entityClass) {
+    	return (T)sessionFactory.getCurrentSession().createCriteria(entityClass)
+    						.add(Restrictions.eq(propertyName, name)).list();
+    	
     }
     
     

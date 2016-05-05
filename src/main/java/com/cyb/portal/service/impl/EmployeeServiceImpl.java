@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-/**
- * @author Ranga Reddy
- * @version 1.0
- */
+
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {

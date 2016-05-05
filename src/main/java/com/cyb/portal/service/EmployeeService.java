@@ -4,10 +4,6 @@ import com.cyb.portal.entity.Employee;
 
 import java.util.List;
 
-/**
- * @author Ranga Reddy
- * @version 1.0
- */
 public interface EmployeeService {
 	public long createEmployee(Employee employee);
     public Employee updateEmployee(Employee employee);

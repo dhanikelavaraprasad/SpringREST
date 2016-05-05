@@ -7,11 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cyb.portal.entity.base.BaseEntity;
+
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Employee")
-public class Employee implements Serializable {
+public class Employee extends BaseEntity {
 	
 	private static final long serialVersionUID = -7988799579036225137L;
 	
@@ -29,8 +31,19 @@ public class Employee implements Serializable {
     private float salary;
 
     public Employee() {
+    	super();
     }
-    public long getId() {
+    
+    
+    public Employee(long id, String name, int age, float salary) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.salary = salary;
+	}
+
+
+	public long getId() {
         return id;
     }
     public void setId(long id) {
@@ -55,13 +68,4 @@ public class Employee implements Serializable {
         this.salary = salary;
     }
     
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
 }

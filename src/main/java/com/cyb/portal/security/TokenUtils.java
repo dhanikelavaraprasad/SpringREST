@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-//import com.brahalla.Cerberus.model.security.CerberusUser;
+import com.cyb.portal.security.model.PortalUsers;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -25,10 +25,10 @@ public class TokenUtils {
 	  private final String AUDIENCE_MOBILE    = "mobile";
 	  private final String AUDIENCE_TABLET    = "tablet";
 
-	  @Value("${cerberus.token.secret}")
+	  @Value("${portal.token.secret}")
 	  private String secret;
 
-	  @Value("${cerberus.token.expiration}")
+	  @Value("${portal.token.expiration}")
 	  private Long expiration;
 
 	  public String getUsernameFromToken(String token) {
@@ -156,11 +156,11 @@ public class TokenUtils {
 	  }
 
 	  public Boolean validateToken(String token, UserDetails userDetails) {
-	    CerberusUser user = (CerberusUser) userDetails;
+		PortalUsers user = (PortalUsers) userDetails;
 	    final String username = this.getUsernameFromToken(token);
 	    final Date created = this.getCreatedDateFromToken(token);
 	    final Date expiration = this.getExpirationDateFromToken(token);
-	    return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)) && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())));
+	    return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)));
 	  }
 
 }

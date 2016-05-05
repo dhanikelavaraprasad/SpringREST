@@ -9,14 +9,14 @@
 	<!-- Specifying the Versions of Spring, Hiberante, MySQL etc -->
 	<properties>
 		<spring.version>4.1.5.RELEASE</spring.version>
-		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<spring.security.version>3.2.0.RELEASE</spring.security.version>
 		<hibernate.version>4.3.8.Final</hibernate.version>
 		<mysql.version>5.1.10</mysql.version>
 		<junit-version>4.11</junit-version>
 		<servlet-api-version>3.1.0</servlet-api-version>
 		<jsp-version>2.1</jsp-version>
 		<jstl-version>1.2</jstl-version>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<jackson.databind-version>2.2.3</jackson.databind-version>
 		<jjwt.version>0.4</jjwt.version>
@@ -56,17 +56,6 @@
 	       <version>${jjwt.version}</version>
 	    </dependency>
 
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency> -->
-		
 		<!-- Spring 4 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -133,8 +122,6 @@
 		</dependency>
 
 		<!-- Servlet and JSP -->
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
-			<version>${servlet-api-version}</version> </dependency> -->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -198,6 +185,13 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+		
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
