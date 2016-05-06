@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+       
+	<context:property-placeholder location="classpath:application-local.properties"/>
+	<!-- Enable the annotations for defining the secure role -->
+	<global-method-security pre-post-annotations="enabled" />
+    
+    <http pattern="/api/login" security="none"/>
+    <http pattern="/api/signup" security="none"/>
+
+    <http pattern="/api/**" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+        <custom-filter before="FORM_LOGIN_FILTER" ref="authenticationTokenFilter"/>
+       <!--  <intercept-url pattern="/api/**" access="isAuthenticated()" /> -->
+    </http>
+    
+    <beans:bean id="authenticationTokenFilter" class="com.cyb.portal.security.AuthenticationTokenFilter">
+    	<beans:property name="authenticationManager" ref="authenticationManager" />
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsService"/> 
+    </authentication-manager>
+	
+	<beans:bean id="userDetailsService"
+		class="com.cyb.portal.service.impl.UserServiceImpl" />
+		
+	<beans:bean id="tokenAuthenticationSuccessHandler"
+		class="com.cyb.portal.security.TokenUrlAuthenticationSuccessHandler" />	
+		
+	<beans:bean id="bcryptEncoder"
+        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+        
+     <beans:bean id="restAuthenticationEntryPoint"
+     class="com.cyb.portal.security.EntryPointUnauthorizedHandler" />
+        
+     
+</beans:beans>
