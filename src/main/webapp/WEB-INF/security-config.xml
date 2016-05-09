@@ -9,16 +9,40 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
        
-	<context:property-placeholder location="classpath:application-local.properties"/>
+     <context:annotation-config></context:annotation-config>  
+     <context:component-scan base-package="com.cyb.portal"></context:component-scan>  
+	 <context:property-placeholder location="classpath:application-local.properties" ignore-resource-not-found="false"  order="1"/>
 	<!-- Enable the annotations for defining the secure role -->
 	<global-method-security pre-post-annotations="enabled" />
+	 <http pattern="/api/auth" security="none"/>
+	<http pattern="/api/**" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+      <custom-filter ref="myFilter" position="FORM_LOGIN_FILTER"/>
+
+      <logout />
+   </http>
+
+   <beans:bean id="myFilter"
+    class="com.cyb.portal.security.AuthenticationTokenFilter">
+      <beans:property name="authenticationManager" ref="authenticationManager"/>
+<!--       <beans:property name="authenticationSuccessHandler" ref="mySuccessHandler"/>
+ -->   </beans:bean>
+   <beans:bean id="mySuccessHandler"
+    class="com.cyb.portal.security.TokenUrlAuthenticationSuccessHandler"/>
+
+   <authentication-manager alias="authenticationManager">
+      <authentication-provider user-service-ref="userDetailsService"/> 
+   </authentication-manager>
+   
+   <beans:bean id="userDetailsService"
+		class="com.cyb.portal.service.impl.UserServiceImpl" />
+
     
-    <http pattern="/api/login" security="none"/>
+    <!-- <http pattern="/api/login" security="none"/>
     <http pattern="/api/signup" security="none"/>
 
     <http pattern="/api/**" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
         <custom-filter before="FORM_LOGIN_FILTER" ref="authenticationTokenFilter"/>
-       <!--  <intercept-url pattern="/api/**" access="isAuthenticated()" /> -->
+        <intercept-url pattern="/api/**" access="isAuthenticated()"/>
     </http>
     
     <beans:bean id="authenticationTokenFilter" class="com.cyb.portal.security.AuthenticationTokenFilter">
@@ -40,6 +64,6 @@
         
      <beans:bean id="restAuthenticationEntryPoint"
      class="com.cyb.portal.security.EntryPointUnauthorizedHandler" />
-        
+         -->
      
 </beans:beans>

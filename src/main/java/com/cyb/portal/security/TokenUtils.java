@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.cyb.portal.security.model.PortalUsers;
+import com.cyb.portal.util.URIConstants;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -25,11 +26,11 @@ public class TokenUtils {
 	  private final String AUDIENCE_MOBILE    = "mobile";
 	  private final String AUDIENCE_TABLET    = "tablet";
 
-	  @Value("${portal.token.secret}")
-	  private String secret;
+	 //@Value("${portal.token.secret}")
+	  private String secret = URIConstants.TOKEN_SECRET;
 
-	  @Value("${portal.token.expiration}")
-	  private Long expiration;
+	  //@Value("${portal.token.expiration}")
+	  private Long expiration = URIConstants.TOKEN_EXPIRE;
 
 	  public String getUsernameFromToken(String token) {
 	    String username;

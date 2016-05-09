@@ -10,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,17 +24,18 @@ import com.cyb.portal.security.TokenUtils;
 import com.cyb.portal.security.json.AuthenticationRequest;
 import com.cyb.portal.security.json.AuthenticationResponse;
 import com.cyb.portal.security.model.PortalUsers;
+import com.cyb.portal.util.URIConstants;
 
 
 
 @RestController
-@RequestMapping("${portal.route.authentication}")
+@RequestMapping(URIConstants.ROUTE_AUTH)
 public class AuthenticationController {
 	
 	  private final Logger logger = Logger.getLogger(this.getClass());
 
-	  @Value("${portal.token.header}")
-	  private String tokenHeader;
+	 /* @Value("${portal.token.header}")
+	  private String tokenHeader;*/
 
 	  @Autowired
 	  private AuthenticationManager authenticationManager;
@@ -47,25 +50,31 @@ public class AuthenticationController {
 	  public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
 
 	    // Perform the authentication
-	    Authentication authentication = this.authenticationManager.authenticate(
+	   /* Authentication authentication = this.authenticationManager.authenticate(
 	      new UsernamePasswordAuthenticationToken(
 	        authenticationRequest.getUsername(),
 	        authenticationRequest.getPassword()
 	      )
 	    );
-	    SecurityContextHolder.getContext().setAuthentication(authentication);
+	    SecurityContextHolder.getContext().setAuthentication(authentication);*/
 
 	    // Reload password post-authentication so we can generate token
 	    UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+	  //  User user = userDao.findByUsernameAndPassword("username", "password");
+	    SecurityContext ctx = SecurityContextHolder.createEmptyContext();
+	    SecurityContextHolder.setContext(ctx);
+	    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
+	    authentication.setDetails(userDetails);
+	    ctx.setAuthentication(authentication);
 	    String token = this.tokenUtils.generateToken(userDetails);
 
 	    // Return the token
 	    return ResponseEntity.ok(new AuthenticationResponse(token));
 	  }
 
-	  @RequestMapping(value = "${portal.route.authentication.refresh}", method = RequestMethod.GET)
+	  @RequestMapping(value = URIConstants.ROUTE_AUTH_REFRESH, method = RequestMethod.GET)
 	  public ResponseEntity<?> authenticationRequest(HttpServletRequest request) {
-	    String token = request.getHeader(this.tokenHeader);
+	    String token = request.getHeader(URIConstants.TOKEN_HEADER);
 	    String username = this.tokenUtils.getUsernameFromToken(token);
 	    PortalUsers user = (PortalUsers) this.userDetailsService.loadUserByUsername(username);
 	    //if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordReset())) {

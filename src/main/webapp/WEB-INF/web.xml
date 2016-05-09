@@ -12,6 +12,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+        	/WEB-INF/mvc-dispatcher-servlet.xml
             /WEB-INF/security-config.xml <!-- Spring Security related context -->
         </param-value>
     </context-param>
@@ -26,6 +27,7 @@
                 /WEB-INF/mvc-dispatcher-servlet.xml
             </param-value>
         </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>

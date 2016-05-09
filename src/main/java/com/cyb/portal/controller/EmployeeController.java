@@ -15,6 +15,7 @@ import com.cyb.portal.service.EmployeeService;
 import com.cyb.portal.util.URIConstants;
 
 @RestController
+@RequestMapping(URIConstants.GET_ALL_EMP)
 public class EmployeeController {
 	
 	private static final Logger logger = Logger.getLogger(EmployeeController.class);
@@ -56,7 +57,7 @@ public class EmployeeController {
         return "redirect:getAllEmployees";
     }
     
-    @RequestMapping(value = URIConstants.GET_ALL_EMP, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody List<Employee> getAllEmployees() {
     	logger.info("Getting the all Employees.");
         return employeeService.getAllEmployees();
