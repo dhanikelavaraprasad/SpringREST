@@ -11,7 +11,7 @@
        
      <context:annotation-config></context:annotation-config>  
      <context:component-scan base-package="com.cyb.portal"></context:component-scan>  
-	 <context:property-placeholder location="classpath:application-local.properties" ignore-resource-not-found="false"  order="1"/>
+	 <context:property-placeholder location="classpath*:application-local.properties" ignore-resource-not-found="false"  order="1"/>
 	<!-- Enable the annotations for defining the secure role -->
 	<global-method-security pre-post-annotations="enabled" />
 	 <http pattern="/api/auth" security="none"/>
@@ -24,8 +24,8 @@
    <beans:bean id="myFilter"
     class="com.cyb.portal.security.AuthenticationTokenFilter">
       <beans:property name="authenticationManager" ref="authenticationManager"/>
-<!--       <beans:property name="authenticationSuccessHandler" ref="mySuccessHandler"/>
- -->   </beans:bean>
+      <beans:property name="authenticationSuccessHandler" ref="mySuccessHandler"/>
+   </beans:bean>
    <beans:bean id="mySuccessHandler"
     class="com.cyb.portal.security.TokenUrlAuthenticationSuccessHandler"/>
 

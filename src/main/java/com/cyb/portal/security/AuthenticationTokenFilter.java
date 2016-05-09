@@ -7,13 +7,17 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
@@ -31,12 +35,16 @@ public class AuthenticationTokenFilter extends
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private EntryPointUnauthorizedHandler restAuthenticationEntryPoint;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String authToken = httpRequest.getHeader(URIConstants.TOKEN_HEADER);
 		String username = this.tokenUtils.getUsernameFromToken(authToken);
 
@@ -55,12 +63,17 @@ public class AuthenticationTokenFilter extends
 					SecurityContextHolder.getContext().setAuthentication(
 							authentication);
 				}
+				
 				chain.doFilter(request, response);
 			} catch (AuthenticationException authenticationException) {
 				SecurityContextHolder.clearContext();
-				// authenticationEntryPoint.commence(request, response,
-				// authenticationException);
+				restAuthenticationEntryPoint.commence(httpRequest, httpResponse,
+				 authenticationException);
 			}
+		} else {
+			restAuthenticationEntryPoint.commence(httpRequest, httpResponse,
+					 null);
+			
 		}
 
 	}

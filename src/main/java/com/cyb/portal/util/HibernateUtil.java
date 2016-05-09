@@ -51,8 +51,12 @@ public class HibernateUtil {
     
     @SuppressWarnings("unchecked")
 	public <T> T findByUsername(String propertyName, Serializable name, Class<T> entityClass) {
-    	return (T)sessionFactory.getCurrentSession().createCriteria(entityClass)
-    						.add(Restrictions.eq(propertyName, name)).list().get(0);
+    	
+    	List<?> list = null;
+    	list = sessionFactory.getCurrentSession().createCriteria(entityClass)
+    						.add(Restrictions.eq(propertyName, name)).list();
+    	return (T) ((list != null) ? list.get(0) : list);
+    	
     	
     }
     
